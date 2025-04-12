@@ -5,8 +5,8 @@ function Stack () {
         items.push(element);
     }
 
-    this.pop = function (element) {
-        items.pop(element);
+    this.pop = function () {
+        return items.pop();
     }
 
     this.peek = function () {
@@ -30,8 +30,23 @@ function Stack () {
     }
 }
 
-var stack = new Stack();
-stack.push(1)
-stack.push(2)
+// 10진수 2진수 변환
+function translateNumber (number) {
+    const stack = new Stack();
+    let rest = 0;
+    let result = "";
+    // 인자로 받은 숫자가 0이 될때 까지 반복
+    while (number > 0) {
+        rest = Math.floor(number % 2);
+        stack.push(rest);
+        number = Math.floor(number / 2);
+    }
 
-console.log(stack.peek())
+    while (!stack.isEmpty()) {
+        result += stack.pop().toString();
+    }
+
+    return result;
+}
+
+console.log("=====",translateNumber(2))
